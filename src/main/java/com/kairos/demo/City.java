@@ -5,61 +5,53 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
 public class City {
-	 private String name;
+	
+	private String name;
+    private Set<City> road = new HashSet<>();
 
-	    private Set<City> road = new HashSet<>();
+    /**
+     * Parameterized constructor
+     * @param name
+     */
+    public City(String name) {
+        Objects.requireNonNull(name);
+        this.name = name.trim().toUpperCase();
+    }
+    
+    /**
+     * Default constructor
+     */
+    public City() {
+    }
 
-	    private City(String name) {
-	        Objects.requireNonNull(name);
-	        this.name = name.trim().toUpperCase();
-	    }
+    public String getName() {
+		return name;
+	}
 
-	    private City() {
-	    }
+	public void setName(String name) {
+		this.name = name;
+	}    
 
-	    public static City build(String name) {
-	        return new City(name);
-	    }
+    public City addNearby(City cityMap) {
+        road.add(cityMap);
+        return this;
+    }
 
-	    public String prettyPrint() {
-	        return road
-	                .stream()
-	                .map(City::getName)
-	                .collect(Collectors.joining(","));
-	    }
+    public Set<City> getNearby() {
+        return road;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City)) return false;
+        City city = (City) o;
+        return Objects.equals(name, city.name);
+    }
 
-	    public City addNearby(City cityMap) {
-	        road.add(cityMap);
-	        return this;
-	    }
-
-	    public Set<City> getNearby() {
-	        return road;
-	    }
-	    
-	    @Override
-	    public boolean equals(Object o) {
-	        if (this == o) return true;
-	        if (!(o instanceof City)) return false;
-	        City city = (City) o;
-	        return Objects.equals(name, city.name);
-	    }
-
-	    public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		@Override
-	    public int hashCode() {
-	        return Objects.hash(name);
-	    }
+	@Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
