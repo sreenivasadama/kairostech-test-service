@@ -2,19 +2,25 @@
 
 This is a test code for finding whether the destination city is reachable from origin city
 
-SetUp:
-
+# SetUp:
+~~~~
 mvn clean install
+~~~~
 
-Run:
+# Run:
+~~~~
 mvn spring-boot:run
-
-Test:
+~~~~
+# Test:
+~~~~
 mvn clean test
+~~~~
 
-Endpoint access:
+# Endpoint access:
 
+~~~~
 http://localhost:8080/connected?origin=city1&destination=city2
+~~~~
 
 Given, a predefined city connections in cities.txt,
 
