@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.lang.NonNull;
+
 public class City {
 	
 	private String name;
@@ -15,7 +17,6 @@ public class City {
      * @param name
      */
     public City(String name) {
-        Objects.requireNonNull(name);
         this.name = name.trim().toUpperCase();
     }
     
